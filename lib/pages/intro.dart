@@ -20,7 +20,7 @@ class IntroPage extends StatelessWidget {
                 padding: const EdgeInsets.all(25),
                 child: Image.asset(
                   "lib/images/logo-phone.png",
-                  color: Colors.white70,
+                  color: AppColors.primeWhite,
                 ),
               ),
 
