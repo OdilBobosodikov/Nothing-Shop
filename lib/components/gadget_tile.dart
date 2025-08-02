@@ -5,8 +5,8 @@ import '../models/gadget.dart';
 
 class GadgetTile extends StatelessWidget {
   Gadget gadget;
-
-  GadgetTile({super.key, required this.gadget});
+  void Function()? onTap;
+  GadgetTile({super.key, required this.gadget, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +22,20 @@ class GadgetTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(gadget.imagePath),
+                Image.asset(
+                  gadget.imagePath,
+                  fit: BoxFit.contain,
+                  width: 250,
+                  height: 250,
+                ),
+                const SizedBox(height: 10),
                 Text(
                   gadget.description,
-                  style: TextStyle(
-                    color: Colors.white24,
-                  ),
+                  style: TextStyle(color: AppColors.secondaryGrey),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -38,7 +43,7 @@ class GadgetTile extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,21 +60,26 @@ class GadgetTile extends StatelessWidget {
                       ),
                     ),
 
-
-                    Text("\$"+gadget.price, style: TextStyle(color: Colors.white24),),
+                    Text(
+                      "\$" + gadget.price,
+                      style: TextStyle(color: AppColors.secondaryGrey),
+                    ),
                   ],
                 ),
 
-                Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: AppColors.primeWhite,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
+                GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.primeWhite,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
                     ),
+                    child: Icon(Icons.add, color: AppColors.background),
                   ),
-                  child: Icon(Icons.add, color: AppColors.background),
                 ),
               ],
             ),

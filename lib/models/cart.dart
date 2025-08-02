@@ -1,7 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:sneakers_shop/models/gadget.dart';
 
-class Cart {
+class Cart extends ChangeNotifier {
   List<Gadget> shopGadgets = [
+    Gadget(
+      name: "Nothing Phone (1)",
+      price: "399",
+      imagePath: "lib/images/Nothing-Phone-1-white.png", // update path as needed
+      description:
+      "Nothing Phone (1) features a transparent design, smooth OLED display, fast performance, and a clean Android experience that stands out.",
+    ),
     Gadget(
       name: "Nothing Headphone",
       price: "149",
@@ -10,39 +18,31 @@ class Cart {
           "Nothing Headphone offers a transparent build, active noise cancellation, 40-hour battery life, and deep, immersive sound for every beat.",
     ),
     Gadget(
-      name: "CMF Watch Pro 2",
-      price: "69",
-      imagePath: "lib/images/Nothing-Watch.png", // update as needed
-      description:
-          "CMF Watch Pro 2 blends a clean, modern design with smart fitness tracking, crisp visuals, and all-day comfort on your wrist.",
-    ),
-    Gadget(
-      name: "Nothing Ear",
+      name: "Nothing Ear (1)",
       price: "99",
-      imagePath: "assets/images/nothing_ear.png",
-      description: "Nothing Ear delivers a sleek transparent design, powerful bass, clear calls, and long battery life in a compact form.",
-    ),
-    Gadget(
-      name: "Nothing Phone (3)",
-      price: "549",
-      imagePath: "assets/images/nothing_phone_3.png",
+      imagePath: "lib/images/Nothing-Ear.png",
       description:
-          "Nothing Phone (3) combines flagship power, a transparent body, advanced cameras, and a seamless user experience that redefines Android.",
+          "Nothing Ear delivers a sleek transparent design, powerful bass, clear calls, and long battery life in a compact form.",
     ),
   ];
 
   List<Gadget> userCard = [];
 
-  List<Gadget> getShopItems()
-  {
+  List<Gadget> getShopItems() {
     return shopGadgets;
   }
 
-  List<Gadget> getUserCard()
-  {
+  List<Gadget> getUserCard() {
     return userCard;
   }
 
-  void addItemToCourt(Gadget gadget) => userCard.add(gadget);
-  void removeItemToCourt(Gadget gadget) => userCard.remove(gadget);
+  void addItemToCourt(Gadget gadget) {
+    userCard.add(gadget);
+    notifyListeners();
+  }
+
+  void removeItemToCourt(Gadget gadget) {
+    userCard.remove(gadget);
+    notifyListeners();
+  }
 }
